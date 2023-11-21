@@ -1,0 +1,10 @@
+#!/bin/bash
+keyfile="/home/${USER}/.ssh/tmp_key"
+sshKeyGen=/usr/bin/ssh-keygen
+auth_keys="/home/${USER}/.ssh/authorized_keys"
+$sshKeyGen -t rsa -f "$keyfile" -N ""
+cat "${keyfile}.pub" >> "$auth_keys"
+chmod 644 "$auth_keys"
+cp "${keyfile}.pub" "/home/${USER}/.ssh/id_rsa.pub"
+cp "${keyfile}" "/home/${USER}/.ssh/id_rsa"
+rm "$keyfile"
